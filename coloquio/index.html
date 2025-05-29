@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Coloquio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-dark text-light">
+    <center>
+        <h1>Coloquio: JavaScript, Funciones y DOM 💙💚💛</h1>
+        <div class="d-flex justify-content-center align-items-center">
+            <p>Ingresa un número</p>
+            <input type="number" id="numberInput" class="form-control w-25">
+            <button id="calculateButton" class="btn btn-primary">Doble</button>
+            <button id ="factorialButton" class="btn btn-success">Factorial</button>
+            <button id="primoButton" class="btn btn-warning">Es Primo?</button>
+        </div>
+        <div id="result" class="mt-3 text-dark w-25 rounded"></div>
+    </center>
+    <script>
+        const input = document.getElementById("numberInput");
+        const result = document.getElementById("result");
+
+        document.getElementById("calculateButton").addEventListener("click", () => {
+            const value = parseInt(input.value);
+            if (isNaN(value)) return result.textContent = "Ingresa un número válido.";
+            result.textContent = `El doble de ${value} es ${value * 2}`;
+            result.classList.remove("bg-primary", "bg-success", "bg-warning");
+            result.classList.add("bg-primary")
+        });
+
+        document.getElementById("factorialButton").addEventListener("click", () => {
+            const value = parseInt(input.value);
+            if (isNaN(value)) return result.textContent = "Ingresa un número válido.";
+            if (value < 0) return result.textContent = "Ingresa un número entero no negativo.";
+            let factorial = 1;
+            for (let i = 2; i <= value; i++) {
+                factorial = factorial * i;
+            }
+            result.textContent = `El factorial de ${value} es ${factorial}`;
+            result.classList.remove("bg-primary", "bg-success", "bg-warning");
+            result.classList.add("bg-success")
+        });
+
+        document.getElementById("primoButton").addEventListener("click", () => {
+            const value = parseInt(input.value);
+            if (isNaN(value)) return result.textContent = "Ingresa un número válido.";
+            if (value < 2) return result.textContent = `${value} no es primo`;
+            let isPrime = true;
+            for (let i = 2; i < value; i++) {
+                if (value % i === 0) {
+                    isPrime = false;
+                    break;
+                }
+            }
+            result.textContent = isPrime ? `${value} es primo` : `${value} no es primo`;
+            result.classList.remove("bg-primary", "bg-success", "bg-warning");
+            result.classList.add("bg-warning")
+        });
+    </script>
+</body>
+</html>
